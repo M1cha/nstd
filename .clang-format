@@ -1,0 +1,21 @@
+BasedOnStyle: WebKit
+
+AlignAfterOpenBracket: AlwaysBreak
+AlignEscapedNewlines: DontAlign
+AlignOperands: true
+AllowShortFunctionsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BinPackParameters: false
+BinPackArguments: false
+ColumnLimit: 80
+PointerAlignment: Right
+SpacesInContainerLiterals: false
+IncludeCategories:
+  - Regex:           '^<.*\.h>'
+    Priority:        1
+  - Regex:           '^<.*'
+    Priority:        2
+  - Regex:           '.*'
+    Priority:        3
+ForEachMacros:
+  - 'SLICE_FOREACH'

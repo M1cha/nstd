@@ -27,7 +27,7 @@ static inline struct buf buf_new(void *const p, const size_t len)
 
 static inline void *buf_uninit_ptr(struct buf *const buf)
 {
-    return buf->p + buf->used;
+    return ((char *)buf->p) + buf->used;
 }
 
 static inline size_t buf_remaining(struct buf *const buf)

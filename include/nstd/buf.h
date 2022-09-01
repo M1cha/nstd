@@ -15,6 +15,18 @@ struct buf {
     size_t used;
 };
 
+#define BUF_STACK(name, len) \
+    uint8_t _bufdata_##name[(len)]; \
+    struct buf name = buf_new(_bufdata_##name, (len))
+
+#define BUF_STACK_STATIC(name, _len) \
+    static uint8_t _bufdata_##name[(_len)]; \
+    static struct buf name = { \
+        .p = _bufdata_##name, \
+        .len = (_len), \
+        .used = 0, \
+    }
+
 /// create a new buffer on the given memory range
 static inline struct buf buf_new(void *const p, const size_t len)
 {

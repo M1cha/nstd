@@ -15,6 +15,7 @@ add_compile_options(
 
 add_library(nstd
     buf.c
+    time.c
 )
 target_include_directories(nstd PUBLIC
     include

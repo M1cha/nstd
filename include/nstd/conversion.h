@@ -4,6 +4,8 @@
 #include <nstd/result.h>
 
 #include <errno.h>
+#include <stddef.h>
+#include <stdint.h>
 
 static inline struct result int_to_size(size_t *const dst, const int src)
 {

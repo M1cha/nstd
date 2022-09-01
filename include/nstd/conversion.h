@@ -9,6 +9,7 @@
 
 static inline struct result int_to_size(size_t *const dst, const int src)
 {
+    // TODO check value instead of type
     if (src < 0 || sizeof(src) > sizeof(*dst)) {
         *dst = 0;
         return result_new(-ERANGE);

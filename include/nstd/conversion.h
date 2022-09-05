@@ -30,6 +30,17 @@ static inline struct result double_to_u64(uint64_t *const dst, const double src)
     return result_new(0);
 }
 
+static inline struct result double_to_i64(int64_t *const dst, const double src)
+{
+    if (src < INT64_MIN || src > INT64_MAX) {
+        *dst = 0;
+        return result_new(-ERANGE);
+    }
+
+    *dst = (int64_t)src;
+    return result_new(0);
+}
+
 static inline struct result u64_to_i64(int64_t *const dst, uint64_t src)
 {
     if (src > INT64_MAX) {

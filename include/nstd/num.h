@@ -81,4 +81,15 @@ u32_checked_sub(const uint32_t self, const uint32_t rhs, uint32_t *const result)
     return result_new(0);
 }
 
+static inline struct result
+usize_checked_add(const size_t self, const size_t rhs, size_t *const result)
+{
+    if (rhs > SIZE_MAX - self) {
+        return result_new(-ERANGE);
+    }
+
+    *result = self + rhs;
+    return result_new(0);
+}
+
 #endif /* NSTD_NUM_H */

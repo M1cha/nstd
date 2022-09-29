@@ -4,8 +4,10 @@
 #include <nstd/result.h>
 
 #include <errno.h>
+#include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 static inline struct result int_to_size(size_t *const dst, const int src)
 {
@@ -82,4 +84,47 @@ static inline struct result i64_to_u32(uint32_t *const dst, const int64_t src)
     *dst = (uint32_t)src;
     return result_new(0);
 }
+
+static inline struct result
+ull_to_usize(size_t *const dst, const unsigned long long src)
+{
+    if (src > SIZE_MAX) {
+        *dst = 0;
+        return result_new(-ERANGE);
+    }
+
+    *dst = (size_t)src;
+    return result_new(0);
+}
+
+static inline struct result
+string_to_ull(unsigned long long *const dst, const char *src)
+{
+    char *end = NULL;
+
+    unsigned long long res = strtoull(src, &end, 10);
+    if (res == ULLONG_MAX && errno) {
+        // out of range
+        return result_new(-errno);
+    }
+    if (*end) {
+        // trailing garbage
+        return result_new(-EINVAL);
+    }
+
+    *dst = res;
+    return result_new(0);
+}
+
+static inline struct result string_to_usize(size_t *const dst, const char *src)
+{
+    unsigned long long value;
+    struct result res = string_to_ull(&value, src);
+    if (res.reason) {
+        return res;
+    }
+
+    return ull_to_usize(dst, value);
+}
+
 #endif /* NSTD_CONVERSION_H */

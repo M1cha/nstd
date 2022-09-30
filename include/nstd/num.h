@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <limits.h>
 #include <nstd/result.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #define IS_UNSIGNED(x) (((x)-1) > 0)

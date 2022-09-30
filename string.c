@@ -23,3 +23,16 @@ const char *strip_prefix(const char *string, const char *prefix)
 
     return string;
 }
+
+size_t string_count_matching_chars(const char *string, char needle)
+{
+    size_t count = 0;
+
+    for (; *string; string += 1) {
+        if (*string == needle) {
+            count += 1;
+        }
+    }
+
+    return count;
+}

@@ -1,6 +1,7 @@
 #include <nstd/string.h>
 
 #include <stddef.h>
+#include <string.h>
 
 const char *strip_prefix(const char *string, const char *prefix)
 {
@@ -35,4 +36,19 @@ size_t string_count_matching_chars(const char *string, char needle)
     }
 
     return count;
+}
+
+bool string_eq(const char *const a, const char *const b)
+{
+    // both are NULL, treat them as being equal
+    if (a == NULL && b == NULL) {
+        return true;
+    }
+
+    // only one of them is NULL
+    if (a == NULL || b == NULL) {
+        return false;
+    }
+
+    return !strcmp(a, b);
 }

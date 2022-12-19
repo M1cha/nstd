@@ -93,4 +93,17 @@ usize_checked_add(const size_t self, const size_t rhs, size_t *const result)
     return result_new(0);
 }
 
+/// Based on: https://stackoverflow.com/a/1815371
+static inline struct result
+usize_checked_mul(const size_t self, const size_t rhs, size_t *const result)
+{
+    size_t value = self * rhs;
+    if (value != 0 && value / self != rhs) {
+        return result_new(-ERANGE);
+    }
+
+    *result = value;
+    return result_new(0);
+}
+
 #endif /* NSTD_NUM_H */

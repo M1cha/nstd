@@ -37,6 +37,11 @@ static inline struct buf buf_new(void *const p, const size_t len)
     };
 }
 
+static inline void buf_clear(struct buf *const buf)
+{
+    buf->used = 0;
+}
+
 static inline void *buf_uninit_ptr(struct buf *const buf)
 {
     return ((char *)buf->p) + buf->used;

@@ -15,6 +15,7 @@ add_compile_options(
 
 add_library(nstd
     buf.c
+    conversion.c
     string.c
     time.c
 )

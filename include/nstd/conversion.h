@@ -5,6 +5,7 @@
 
 #include <errno.h>
 #include <limits.h>
+#include <nstd/buf.h>
 #include <nstd/compiler.h>
 #include <nstd/num.h>
 #include <stddef.h>
@@ -332,5 +333,9 @@ static inline struct result string_to_usize(size_t *const dst, const char *src)
 
     return ulonglong_to_usize(dst, value);
 }
+
+struct result buf_to_usize(size_t *dst, struct buf *buf);
+
+struct result usize_to_string(struct buf *dst, size_t src);
 
 #endif /* NSTD_CONVERSION_H */

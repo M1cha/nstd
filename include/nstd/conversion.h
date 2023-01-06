@@ -325,7 +325,8 @@ string_to_ull(unsigned long long *const dst, const char *src)
 
 static inline struct result string_to_usize(size_t *const dst, const char *src)
 {
-    unsigned long long value;
+    // workaround clang-analyzer not understanding `result_new`
+    unsigned long long value = 0;
     struct result res = string_to_ull(&value, src);
     if (res.reason) {
         return res;

@@ -13,7 +13,7 @@ struct result buf_to_usize(size_t *const dst, struct buf *const buf)
         if (!isdigit(digit)) {
             return result_new(-EINVAL);
         }
-        digit -= '0';
+        digit = (uint8_t)(digit - '0');
 
         if (digit >= 10) {
             return result_new(-EINVAL);
